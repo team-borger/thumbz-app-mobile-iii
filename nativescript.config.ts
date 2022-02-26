@@ -1,7 +1,7 @@
 import { NativeScriptConfig } from '@nativescript/core';
 
 export default {
-  id: 'org.nativescript.thumbz-app',
+  id: 'org.nativescript.thumbzapp',
   appPath: 'app',
   appResourcesPath: 'App_Resources',
   android: {
