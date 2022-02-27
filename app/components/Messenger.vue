@@ -36,28 +36,19 @@
       <StackLayout row="1" column="0" width="100%">
         <FlexboxLayout class="message-box">
           <FlexboxLayout class="text-area">
-            <Label
-              :text="'mdi-insert-emoticon' | fonticon"
-              class="mdi icon emojis"
-            ></Label>
-            <TextView
+            <TextField
               hint="Type a message"
               text=""
-              class="text-view"
-            ></TextView>
-            <Label
-              text="'mdi-attach-file' | fonticon"
-              class="mdi icon attach"
-            ></Label>
-            <Label
-              text="'mdi-photo-camera' | fonticon"
-              class="mdi icon camera"
-            ></Label>
+              class="text-view chat-field"
+            ></TextField>
+            <StackLayout elevation="0" class="icon" height="35" width="35" backgroundColor="red" verticalAlignment="center" style="display: flex; flex-direction: column; justify-content: center;">
+              <Label style="font-size: 15px; color: white; text-align: center;">
+                <FormattedString>
+                  <Span class="fas" text.decode="&#xf1d8; "/>
+                </FormattedString>
+              </Label>
+            </StackLayout>
           </FlexboxLayout>
-          <Label
-            text="'mdi-mic' | fonticon"
-            class="mdi icon send"
-          ></Label>
         </FlexboxLayout>
       </StackLayout>
     </GridLayout>
