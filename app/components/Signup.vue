@@ -11,6 +11,7 @@
         <TextField height="50" hint="Mobile number" v-model="form.phone" class="input-rounded"/>
         <TextField height="50" hint="Email" v-model="form.email" class="input-rounded"/>
         <TextField height="50" hint="Password" secure="true" v-model="form.password" class="input-rounded"/>
+        <TextField height="50" hint="Confirm Password" secure="true" v-model="form.confirm_password" class="input-rounded"/>
         <Button height="50" class="login-btn" text="Register" @tap="register()"/>
       </StackLayout>
     </FlexboxLayout>
@@ -25,13 +26,14 @@
     methods: {
       ...mapActions('user', ['REGISTER_USER']),
       async register() {
-        const response = await this.REGISTER_USER(this.form)
-        /*.then(response => {
+        this.REGISTER_USER(this.form)
+        .then(response => {
           console.log(response)
+          this.$navigator.navigate('/login')
         })
         .catch(data => {
           console.log(data.response)
-        })*/
+        })
         console.log(response)
       }
     },
