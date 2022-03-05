@@ -2,37 +2,42 @@
   <Page>
     <ActionBar style="background: #fff; box-shadow: none;">
       <GridLayout width="100%" columns="auto, *" rows="auto, *">
-        <Image style="margin-right: 50px;" row="0" col="0" top="0" src="~/assets/images/hamburger.png" height="20" width="20" @tap="$refs.drawer.nativeView.showDrawer()"/>
-        <Label style="text-align:left; font-weight: bold; font-size: 20px;" row="0" col="1" text="Message"></Label>
+        <!-- <Label style="font-size: 30px; color: #880ED4; text-align: center;">
+          <FormattedString>
+            <Span class="fas" text.decode="&#xf104; "/>
+          </FormattedString>
+        </Label> -->
+        <Label style="text-align:left; font-weight: bold; font-size: 20px;" row="0" text="Message"></Label>
       </GridLayout>
     </ActionBar>
 
-    <RadSideDrawer ref="drawer">
-      <StackLayout ~drawerContent backgroundColor="#ffffff">
-        <Label class="drawer-item" text="Item 1"/>
-        <Label class="drawer-item" text="Item 2"/>
-        <Label class="drawer-item" text="Item 3"/>
-      </StackLayout>
-    </RadSideDrawer>
-
     <GridLayout rows="*, auto" columns="auto" class="wallpaper">
-      <StackLayout row="0" column="0" width="100%">
-        <ScrollView class="messages-area">
-          <FlexboxLayout class="messages">
-            <StackLayout>
-              <FlexboxLayout class="message-bubble-content">
-                <Label class="message-text" text="message.text"
-                  textWrap="true"></Label>
-                <FlexboxLayout class="meta">
-                  <Label
-                    text="message.created | date: 'shortTime'"
-                    class="time"></Label>
-                </FlexboxLayout>
-              </FlexboxLayout>
-            </StackLayout>
+      <ScrollView>
+        <StackLayout orientation="vertical" style="margin: 20px 50px">
+          <FlexboxLayout flexDirection="column" v-for="(item, index) in messages" :key="index">
+            <GridLayout :className="item.isRight === true ? 'nsChatView-item-right' : 'nsChatView-item-left'" rows="auto" columns="auto,*,auto">
+              <Image row="0"
+                :col="item.isRight === true ? '2' : '0'"
+                className="nsChatView-avatar"
+                 verticalAlignment="top"
+                 src="~/assets/images/images.jpg"
+                 visibility="visible" />
+              <StackLayout row="0" col="1" className="nsChatView-message">
+                <StackLayout verticalAlignment="top" :horizontalAlignment="item.isRight ? 'right' : 'left'" className="nsChatView-content">        
+                  <Label :horizontalAlignment="item.isRight ? 'right' : 'left'"
+                         className="nsChatView-date"
+                         :text="item.date"
+                         visibility="visible" />
+                  <Label :horizontalAlignment="item.isRight ? 'right' : 'left'" className="nsChatView-messageText"
+                         :text="item.text" textWrap="true" />
+                </StackLayout>
+
+              </StackLayout>
+
+            </GridLayout>
           </FlexboxLayout>
-        </ScrollView>
-      </StackLayout>
+        </StackLayout>
+      </ScrollView>
       <StackLayout row="1" column="0" width="100%">
         <FlexboxLayout class="message-box">
           <FlexboxLayout class="text-area">
@@ -41,7 +46,7 @@
               text=""
               class="text-view chat-field"
             ></TextField>
-            <StackLayout elevation="0" class="icon" height="35" width="35" backgroundColor="red" verticalAlignment="center" style="display: flex; flex-direction: column; justify-content: center;">
+            <StackLayout elevation="0" class="icon" height="35" width="35" backgroundColor="#880ED4" verticalAlignment="center" style="display: flex; flex-direction: column; justify-content: center; margin-right: 30px;">
               <Label style="font-size: 15px; color: white; text-align: center;">
                 <FormattedString>
                   <Span class="fas" text.decode="&#xf1d8; "/>
@@ -60,8 +65,83 @@
   export default {
     data() {
       return {
-        msg: 'Hello World!',
-        form:{}
+        messages: [
+          {
+            date: 'January 10, 2022',
+            text: 'Hi! How are you?',
+            isRight: true
+          },
+          {
+            date: 'January 11, 2022',
+            text: 'fasfgag',
+            isRight: false
+          },
+          {
+            date: 'January 13, 2022',
+            text: 'ggggg',
+            isRight: true
+          },
+          {
+            date: 'January 10, 2022',
+            text: 'Hi! How are you?',
+            isRight: true
+          },
+          {
+            date: 'January 11, 2022',
+            text: 'fasfgag',
+            isRight: false
+          },
+          {
+            date: 'January 13, 2022',
+            text: 'ggggg',
+            isRight: true
+          },
+          {
+            date: 'January 10, 2022',
+            text: 'Hi! How are you?',
+            isRight: true
+          },
+          {
+            date: 'January 11, 2022',
+            text: 'fasfgag',
+            isRight: false
+          },
+          {
+            date: 'January 13, 2022',
+            text: 'ggggg',
+            isRight: true
+          },
+          {
+            date: 'January 10, 2022',
+            text: 'Hi! How are you?',
+            isRight: true
+          },
+          {
+            date: 'January 11, 2022',
+            text: 'fasfgag',
+            isRight: false
+          },
+          {
+            date: 'January 13, 2022',
+            text: 'ggggg',
+            isRight: true
+          },
+          {
+            date: 'January 10, 2022',
+            text: 'Hi! How are you?',
+            isRight: true
+          },
+          {
+            date: 'January 11, 2022',
+            text: 'fasfgag',
+            isRight: false
+          },
+          {
+            date: 'January 13, 2022',
+            text: 'ggggg',
+            isRight: true
+          }
+        ]
       }
     }
   }
