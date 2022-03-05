@@ -24,16 +24,19 @@ const getters = {
 
 const actions = {
   async REGISTER_USER ({commit}, payload) {
-    return await axiospostApi('create-user', payload)
+    return await axiospostApi('create-user/', payload)
   },
   async LOGIN_USER ({commit}, payload) {
-    return await axiospostApi('login', payload)
+    return await axiospostApi('login/', payload)
   },
   async LOAD_CONTACTS ({commit}) {
-    return await axiosgetApi('conversations')
+    return await axiosgetApi('messages/conversations/')
+  },
+  async SEARCH_USER ({commit}) {
+    return await axiosgetApi('users/search/')
   },
   async LOAD_THREAD ({commit}) {
-    return await axiosgetApi('threads')
+    return await axiosgetApi('messages/threads/')
   },
 }
 

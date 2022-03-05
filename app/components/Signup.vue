@@ -19,7 +19,9 @@
 </template>
 <script>
   import { mapActions, mapMutations, mapGetters } from 'vuex'
+  import Globals from '../mixins/globals'
   export default {
+    mixins: [Globals],
     data: () => ({
       form: {},
       warnings: {},
@@ -32,10 +34,26 @@
           console.log(response)
           this.$navigator.navigate('/login')
         })
-        .catch(data => {
-          console.log(data)
+        .catch(error => {
+          const x = error.data.errors
+          
+          if( x.email[0] == 'Email already exists.' ) {
+            console.log(2.1)
+            this.snackBar("error", "Error", "#e6494b", x.email[0])
+          }
+          else if( x.confirm_password[0] == 'The confirm password and password must match.' ) {
+            console.log(3.1)
+            this.snackBar("error", "Error", "#e6494b", "Passwords do not match!")
+          }
+          else if( x.confirm_password || x.email || x.first_name || x.last_name || x.password || x.phone ) {
+            console.log(1)
+            this.snackBar("error", "Error", "#e6494b", "Please fill all the fields")
+          }
+          else {
+            console.log(x)
+          }
         })
-        console.log(response)
+        // console.log(response)
       }
     },
   }
