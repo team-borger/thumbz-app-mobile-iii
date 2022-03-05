@@ -1,9 +1,8 @@
 <template>
   <Page class="login landing" actionBarHidden="true">
     <FlexboxLayout flexDirection="column" justifyContent="space-between" alignItems="stretch" class="login-container background">
-      <StackLayout verticalAlignment="center" class="login-field" style="text-align: center;">
-        <Image src="res://drawable/logo2" width="100" class="login-image"/>
-        <Label text="ThumbzApp" style="font-weight: bold; color: white; font-size: 15px;"></Label>
+      <StackLayout verticalAlignment="center" class="login-field" style="text-align: center;" height="25%">
+        <Image src="res://drawable/logo2" width="300" class="login-image"/>
       </StackLayout>
       <StackLayout verticalAlignment="center" class="login-field">
         <TextField height="50" hint="Email" v-model="form.email" class="input-rounded"/>
