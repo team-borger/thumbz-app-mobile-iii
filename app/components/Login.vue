@@ -20,10 +20,10 @@
 </template>
 <script>
   import { mapActions, mapMutations, mapGetters } from 'vuex'
-  // import Globals from '../mixins/globals'
+  import Globals from '../mixins/globals'
   // const appversion = require("@nativescript/appversion")
   export default {
-   // mixins: [Globals],
+   mixins: [Globals],
   data: ()  => ({
      // isUpdated: true,
     form: {},
@@ -56,8 +56,8 @@
          })
          .catch(error => {
            this.waiting = false
-           console.log('catch', error.data)
-           this.snackBar("password", "Error", "#e6494b", error.data)
+           // console.log('catch: ', error.data.error)
+           this.snackBar("password", "Error", "#e6494b", "Incorrect email or password")
          })
        /*}
        else {

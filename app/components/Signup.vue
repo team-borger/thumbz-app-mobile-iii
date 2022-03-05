@@ -22,6 +22,7 @@
   export default {
     data: () => ({
       form: {},
+      warnings: {},
     }),
     methods: {
       ...mapActions('user', ['REGISTER_USER']),
@@ -32,7 +33,7 @@
           this.$navigator.navigate('/login')
         })
         .catch(data => {
-          console.log(data.response)
+          console.log(data)
         })
         console.log(response)
       }
