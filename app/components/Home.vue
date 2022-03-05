@@ -30,18 +30,21 @@
                       <FlexboxLayout backgroundColor="#f9f9f9">
                         <FlexboxLayout width="60" style="padding: 15px;">
                           <StackLayout class="avatar">
-                            <StackLayout class="circle-wrapper">
+                            <!-- <StackLayout class="circle-wrapper">
                               <Image src="~/assets/images/images.jpg" height="100%" width="100%" class="thumb"/>
+                            </StackLayout> -->
+                            <StackLayout backgroundColor="#880ED4" height="100%" width="100%" style="border-radius: 50%; display: flex; flex-direction: column; justify-content: center; padding-top: 13px;">
+                              <Label style="font-size: 25px; color: white; text-align: center;" :text="`${messages[index].first_name.charAt(0)}${messages[index].last_name.charAt(0)}`"></Label>
                             </StackLayout>
                           </StackLayout>
                         </FlexboxLayout>
                         <FlexboxLayout flexDirection="column" style="padding: 15px;">
                           <FlexboxLayout justifyContent="space-between">
-                            <Label width="70%" :text="messages[index].sender" fontWeight="bold" style="font-size: 14px; color: #880ED4;"/>
-                            <Label :text="'12:58'" style="font-size: 12px; text-align: right"/>
+                            <Label :class="messages[index].viewed === false ? 'black-text' : ''" width="70%" :text="`${messages[index].first_name} ${messages[index].last_name}`" fontWeight="bold" style="font-size: 14px;"/>
+                            <Label :class="messages[index].viewed === false ? 'black-text' : ''" :text="'12:58'" style="font-size: 12px; text-align: right"/>
                           </FlexboxLayout>
                           <FlexboxLayout>
-                            <Label :text="messages[index].text" fontWeight="bold" style="font-size: 12px;"/>
+                            <Label :class="messages[index].viewed === false ? 'black-text' : ''" :text="messages[index].text" fontWeight="bold" style="font-size: 12px;"/>
                           </FlexboxLayout>
                         </FlexboxLayout>
                       </FlexboxLayout>
@@ -63,16 +66,22 @@ export default {
     form:{},
     messages: [
       {
-        sender: 'User 1',
-        text: 'Message 1'
+        first_name: 'Princess',
+        last_name: 'Garde',
+        text: 'Message 1',
+        viewed: false
       },
       {
-        sender: 'User 2',
-        text: 'Message 2'
+        first_name: 'Alan',
+        last_name: 'Golpeo',
+        text: 'Message 2',
+        viewed: true
       },
       {
-        sender: 'User 3',
-        text: 'Message 3'
+        first_name: 'Raymund',
+        last_name: 'Hinlog',
+        text: 'Message 3',
+        viewed: true
       }
     ]
   }),

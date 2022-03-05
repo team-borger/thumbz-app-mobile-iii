@@ -16,12 +16,18 @@
         <StackLayout orientation="vertical" style="margin: 20px 50px">
           <FlexboxLayout flexDirection="column" v-for="(item, index) in messages" :key="index">
             <GridLayout :className="item.isRight === true ? 'nsChatView-item-right' : 'nsChatView-item-left'" rows="auto" columns="auto,*,auto">
-              <Image row="0"
+              <!-- <Image row="0"
                 :col="item.isRight === true ? '2' : '0'"
                 className="nsChatView-avatar"
                  verticalAlignment="top"
                  src="~/assets/images/images.jpg"
-                 visibility="visible" />
+                 visibility="visible" /> -->
+              <StackLayout row="0"
+                :col="item.isRight === true ? '2' : '0'"
+                class="nsChatView-avatar"
+                backgroundColor="#eee" style="height: 64; display: flex; flex-direction: column; justify-content: center; padding-top: 35px;">
+                <Label style="font-size: 25px; color: black; text-align: center;" :text="`${item.first_name.charAt(0)}${item.last_name.charAt(0)}`"></Label>
+              </StackLayout>
               <StackLayout row="0" col="1" className="nsChatView-message">
                 <StackLayout verticalAlignment="top" :horizontalAlignment="item.isRight ? 'right' : 'left'" className="nsChatView-content">        
                   <Label :horizontalAlignment="item.isRight ? 'right' : 'left'"
@@ -69,77 +75,107 @@
           {
             date: 'January 10, 2022',
             text: 'Hi! How are you?',
-            isRight: true
+            isRight: true,
+            first_name: 'Princess',
+            last_name: 'Garde'
           },
           {
             date: 'January 11, 2022',
             text: 'fasfgag',
-            isRight: false
+            isRight: false,
+            first_name: 'Raymund',
+            last_name: 'Hinlog'
           },
           {
             date: 'January 13, 2022',
             text: 'ggggg',
-            isRight: true
+            isRight: true,
+            first_name: 'Princess',
+            last_name: 'Garde'
           },
           {
             date: 'January 10, 2022',
             text: 'Hi! How are you?',
-            isRight: true
+            isRight: true,
+            first_name: 'Princess',
+            last_name: 'Garde'
           },
           {
             date: 'January 11, 2022',
             text: 'fasfgag',
-            isRight: false
+            isRight: false,
+            first_name: 'Raymund',
+            last_name: 'Hinlog'
           },
           {
             date: 'January 13, 2022',
             text: 'ggggg',
-            isRight: true
+            isRight: true,
+            first_name: 'Princess',
+            last_name: 'Garde'
           },
           {
             date: 'January 10, 2022',
             text: 'Hi! How are you?',
-            isRight: true
+            isRight: true,
+            first_name: 'Princess',
+            last_name: 'Garde'
           },
           {
             date: 'January 11, 2022',
             text: 'fasfgag',
-            isRight: false
+            isRight: false,
+            first_name: 'Raymund',
+            last_name: 'Hinlog'
           },
           {
             date: 'January 13, 2022',
             text: 'ggggg',
-            isRight: true
+            isRight: true,
+            first_name: 'Princess',
+            last_name: 'Garde'
           },
           {
             date: 'January 10, 2022',
             text: 'Hi! How are you?',
-            isRight: true
+            isRight: true,
+            first_name: 'Princess',
+            last_name: 'Garde'
           },
           {
             date: 'January 11, 2022',
             text: 'fasfgag',
-            isRight: false
+            isRight: false,
+            first_name: 'Raymund',
+            last_name: 'Hinlog'
           },
           {
             date: 'January 13, 2022',
             text: 'ggggg',
-            isRight: true
+            isRight: true,
+            first_name: 'Princess',
+            last_name: 'Garde'
           },
           {
             date: 'January 10, 2022',
             text: 'Hi! How are you?',
-            isRight: true
+            isRight: true,
+            first_name: 'Princess',
+            last_name: 'Garde'
           },
           {
             date: 'January 11, 2022',
             text: 'fasfgag',
-            isRight: false
+            isRight: false,
+            first_name: 'Raymund',
+            last_name: 'Hinlog'
           },
           {
             date: 'January 13, 2022',
             text: 'ggggg',
-            isRight: true
+            isRight: true,
+            first_name: 'Princess',
+            last_name: 'Garde'
           }
         ]
       }
