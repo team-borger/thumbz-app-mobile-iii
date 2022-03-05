@@ -55,61 +55,35 @@
         </RadSideDrawer>
     </Page>
 </template>
-
-<script >
-  export default {
-    data() {
-      return {
-        msg: 'Hello World!',
-        form:{},
-        messages: [
-          {
-            sender: 'User 1',
-            text: 'Message 1'
-          },
-          {
-            sender: 'User 2',
-            text: 'Message 2'
-          },
-          {
-            sender: 'User 3',
-            text: 'Message 3'
-          }
-        ]
+<script>
+import { mapActions } from 'vuex'
+export default {
+  data:() => ({
+    msg: 'Hello World!',
+    form:{},
+    messages: [
+      {
+        sender: 'User 1',
+        text: 'Message 1'
+      },
+      {
+        sender: 'User 2',
+        text: 'Message 2'
+      },
+      {
+        sender: 'User 3',
+        text: 'Message 3'
       }
-    }
+    ]
+  }),
+  methods: {
+    ...mapActions('user', ['SEARCH_USER', 'LOAD_CONTACTS']),
+    temporaryLoader() {
+      this.LOAD_CONTACTS() 
+      .then(response => {
+        console.log(response)
+      })
+    },
   }
+}
 </script>
-
-<style scoped>
-    ActionBar {
-        background-color: #53ba82;
-        color: #ffffff;
-    }
-
-    .title {
-        text-align: left;
-        padding-left: 16;
-    }
-
-    .message {
-        vertical-align: center;
-        text-align: center;
-        font-size: 20;
-        color: #333333;
-    }
-
-    .drawer-header {
-        padding: 50 16 16 16;
-        margin-bottom: 16;
-        background-color: #53ba82;
-        color: #ffffff;
-        font-size: 24;
-    }
-
-    .drawer-item {
-        padding: 8 16;
-        color: #333333;
-        font-size: 16;
-    }
-</style>
