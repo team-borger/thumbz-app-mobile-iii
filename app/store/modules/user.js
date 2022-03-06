@@ -6,6 +6,7 @@ const custom = getString('store')
 const initialState = () => {
   return {
     user: {},
+    active_chat: {},
   }
 }
 
@@ -16,6 +17,9 @@ const mutations = {
     state.user = payload
     setString("user", JSON.stringify(payload))
   },
+  SET_ACTIVE_CHAT(state, payload) {
+    state.active_chat = payload
+  },
   RESET_LOGIN_STATE (state) {
     Object.assign(state, initialState())
   }
@@ -23,6 +27,7 @@ const mutations = {
 
 const getters = {
   user: state => state.user,
+  active_chat: state => state.active_chat,
 }
 
 const actions = {

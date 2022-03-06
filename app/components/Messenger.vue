@@ -15,27 +15,24 @@
       <ScrollView>
         <StackLayout orientation="vertical" style="margin: 20px 50px">
           <FlexboxLayout flexDirection="column" v-for="(item, index) in messages" :key="index">
-            <GridLayout :className="item.isRight === true ? 'nsChatView-item-right' : 'nsChatView-item-left'" rows="auto" columns="auto,*,auto">
-              <!-- <Image row="0"
-                :col="item.isRight === true ? '2' : '0'"
-                className="nsChatView-avatar"
-                 verticalAlignment="top"
-                 src="~/assets/images/images.jpg"
-                 visibility="visible" /> -->
+            <!-- <Label :text="item.sender_id" /> -->
+            <!-- <Label :text="user.id" /> -->
+            <GridLayout :className="item.sender_id === user.id ? 'nsChatView-item-right' : 'nsChatView-item-left'" rows="auto" columns="auto,*,auto">
               <StackLayout row="0"
-                :col="item.isRight === true ? '2' : '0'"
+                :col="item.sender_id === user.id ? '2' : '0'"
                 class="nsChatView-avatar"
                 backgroundColor="#eee" style="height: 64; display: flex; flex-direction: column; justify-content: center; padding-top: 35px;">
-                <Label style="font-size: 25px; color: black; text-align: center;" :text="`${item.first_name.charAt(0)}${item.last_name.charAt(0)}`"></Label>
+                <Label v-if="item.sender_id === user.id" style="font-size: 25px; color: black; text-align: center;" :text="`${user.first_name.charAt(0)}${user.last_name.charAt(0)}`"></Label>
+                <Label v-else style="font-size: 25px; color: black; text-align: center;" :text="`${active_chat.first_name.charAt(0)}${active_chat.last_name.charAt(0)}`"></Label>
               </StackLayout>
               <StackLayout row="0" col="1" className="nsChatView-message">
-                <StackLayout verticalAlignment="top" :horizontalAlignment="item.isRight ? 'right' : 'left'" className="nsChatView-content">        
-                  <Label :horizontalAlignment="item.isRight ? 'right' : 'left'"
+                <StackLayout verticalAlignment="top" :horizontalAlignment="item.sender_id === user.id ? 'right' : 'left'" className="nsChatView-content">        
+                  <Label :horizontalAlignment="item.sender_id === user.id ? 'right' : 'left'"
                          className="nsChatView-date"
-                         :text="item.date"
+                         :text="item.date_created"
                          visibility="visible" />
-                  <Label :horizontalAlignment="item.isRight ? 'right' : 'left'" className="nsChatView-messageText"
-                         :text="item.text" textWrap="true" />
+                  <Label :horizontalAlignment="item.sender_id === user.id ? 'right' : 'left'" className="nsChatView-messageText"
+                         :text="item.message" textWrap="true" />
                 </StackLayout>
 
               </StackLayout>
@@ -68,127 +65,29 @@
 </template>
 
 <script>
-  import { mapActions } from 'vuex'
+  import { mapActions, mapGetters } from 'vuex'
   export default {
     data() {
       return {
-        messages: [
-          {
-            date: 'January 10, 2022',
-            text: 'Hi! How are you?',
-            isRight: true,
-            first_name: 'Princess',
-            last_name: 'Garde'
-          },
-          {
-            date: 'January 11, 2022',
-            text: 'fasfgag',
-            isRight: false,
-            first_name: 'Raymund',
-            last_name: 'Hinlog'
-          },
-          {
-            date: 'January 13, 2022',
-            text: 'ggggg',
-            isRight: true,
-            first_name: 'Princess',
-            last_name: 'Garde'
-          },
-          {
-            date: 'January 10, 2022',
-            text: 'Hi! How are you?',
-            isRight: true,
-            first_name: 'Princess',
-            last_name: 'Garde'
-          },
-          {
-            date: 'January 11, 2022',
-            text: 'fasfgag',
-            isRight: false,
-            first_name: 'Raymund',
-            last_name: 'Hinlog'
-          },
-          {
-            date: 'January 13, 2022',
-            text: 'ggggg',
-            isRight: true,
-            first_name: 'Princess',
-            last_name: 'Garde'
-          },
-          {
-            date: 'January 10, 2022',
-            text: 'Hi! How are you?',
-            isRight: true,
-            first_name: 'Princess',
-            last_name: 'Garde'
-          },
-          {
-            date: 'January 11, 2022',
-            text: 'fasfgag',
-            isRight: false,
-            first_name: 'Raymund',
-            last_name: 'Hinlog'
-          },
-          {
-            date: 'January 13, 2022',
-            text: 'ggggg',
-            isRight: true,
-            first_name: 'Princess',
-            last_name: 'Garde'
-          },
-          {
-            date: 'January 10, 2022',
-            text: 'Hi! How are you?',
-            isRight: true,
-            first_name: 'Princess',
-            last_name: 'Garde'
-          },
-          {
-            date: 'January 11, 2022',
-            text: 'fasfgag',
-            isRight: false,
-            first_name: 'Raymund',
-            last_name: 'Hinlog'
-          },
-          {
-            date: 'January 13, 2022',
-            text: 'ggggg',
-            isRight: true,
-            first_name: 'Princess',
-            last_name: 'Garde'
-          },
-          {
-            date: 'January 10, 2022',
-            text: 'Hi! How are you?',
-            isRight: true,
-            first_name: 'Princess',
-            last_name: 'Garde'
-          },
-          {
-            date: 'January 11, 2022',
-            text: 'fasfgag',
-            isRight: false,
-            first_name: 'Raymund',
-            last_name: 'Hinlog'
-          },
-          {
-            date: 'January 13, 2022',
-            text: 'ggggg',
-            isRight: true,
-            first_name: 'Princess',
-            last_name: 'Garde'
-          }
-        ]
+        messages: []
       }
     },
     methods: {
       ...mapActions('user', ['LOAD_THREAD']),
       loadTHreads() {
-        this.LOAD_THREAD()
+        this.LOAD_THREAD(this.active_chat.contact.id)
         .then(response => {
-          console.log(response.data)
+          this.$nextTick(()=>{
+            this.messages = response
+            console.log(this.messages)
+            console.log('aaa', this.active_chat)
+            console.log('bbb', this.user)
+          })
         })
       }
+    },
+    computed: {
+      ...mapGetters('user', ['user', 'active_chat']),
     },
     created() {
       this.loadTHreads()
