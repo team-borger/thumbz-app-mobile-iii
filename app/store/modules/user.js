@@ -15,6 +15,9 @@ const mutations = {
   SET_USER(state, payload) {
     state.user = payload
     setString("user", JSON.stringify(payload))
+  },
+  RESET_LOGIN_STATE (state) {
+    Object.assign(state, initialState())
   }
 }
 

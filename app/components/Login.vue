@@ -26,7 +26,7 @@
   data: ()  => ({
      // isUpdated: true,
     form: {},
-     // waiting: false,
+     waiting: false,
      // version: '',
   }),
    // computed: {
@@ -45,12 +45,11 @@
          console.log(data)
        })*/
        // if(this.hasInternet()) {
-         // this.waiting = true
+         this.waiting = true
          this.LOGIN_USER(this.form)
          .then(response => {
            this.waiting = false
-           this.SET_USER(response)
-           console.log('success', response)
+           this.SET_USER(response.user)
            this.$navigator.navigate('/home', { clearHistory: true })
          })
          .catch(error => {
