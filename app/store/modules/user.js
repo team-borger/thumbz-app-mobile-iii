@@ -35,8 +35,8 @@ const actions = {
   async SEARCH_USER ({commit}) {
     return await axiosgetApi('users/search/')
   },
-  async LOAD_THREAD ({commit}) {
-    return await axiosgetApi('messages/threads/')
+  async LOAD_THREAD ({commit}, sender_id) {
+    return await axiosgetApi(`messages/threads/${sender_id}/`)
   },
 }
 
