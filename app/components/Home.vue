@@ -27,7 +27,7 @@
               <ScrollView>
                 <StackLayout orientation="vertical" style="margin: 20px 50px">
                   <FlexboxLayout flexDirection="column" v-for="(item, index) in contacts" :key="index" elevation="5" height="60" width="100%" class="logout-btn" style="margin: 5px 0;">
-                    <MDCardView dock="bottom" elevation="0" width="100%" height="100%" class="logout-btn" @tap="$navigator.navigate('/messenger')">
+                    <MDCardView dock="bottom" elevation="0" width="100%" height="100%" class="logout-btn" @tap="onContactClick(item)">
                       <FlexboxLayout backgroundColor="#f9f9f9">
                         <FlexboxLayout width="60" style="padding: 15px;">
                           <StackLayout class="avatar">
@@ -80,14 +80,20 @@ export default {
     contacts: []
   }),
   methods: {
-    ...mapMutations('user', ['RESET_LOGIN_STATE']),
+    ...mapMutations('user', ['RESET_LOGIN_STATE', 'SET_ACTIVE_CHAT']),
     ...mapActions('user', ['SEARCH_USER', 'LOAD_CONTACTS']),
     loadContacts() {
-      this.LOAD_CONTACTS() 
+      this.LOAD_CONTACTS()
       .then(response => {
-        this.contacts = response
-        console.log(this.contacts)
+        this.$nextTick(() => {
+          this.contacts = response
+          console.log('asdadas', this.contacts)
+        })
       })
+    },
+    onContactClick(contact) {
+      this.SET_ACTIVE_CHAT(contact)
+      this.$navigator.navigate('/messenger')
     },
     onLogoutBtnClick() {
       confirm({
