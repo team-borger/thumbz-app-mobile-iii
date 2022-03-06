@@ -66,15 +66,17 @@
 
 <script>
   import { mapActions, mapGetters } from 'vuex'
+  import { getString } from "@nativescript/core/application-settings"
   export default {
     data() {
       return {
-        messages: []
+        messages: [],
+        user: {},
       }
     },
     methods: {
       ...mapActions('user', ['LOAD_THREAD']),
-      loadTHreads() {
+      loadThreads() {
         this.LOAD_THREAD(this.active_chat.contact.id)
         .then(response => {
           this.$nextTick(()=>{
@@ -87,10 +89,11 @@
       }
     },
     computed: {
-      ...mapGetters('user', ['user', 'active_chat']),
+      ...mapGetters('user', ['active_chat']),
     },
     created() {
-      this.loadTHreads()
+      this.user = JSON.parse(getString('user'))
+      this.loadThreads()
     }
   }
 </script>
