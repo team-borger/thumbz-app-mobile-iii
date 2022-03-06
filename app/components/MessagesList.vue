@@ -2,7 +2,7 @@
   <Page class="login landing" actionBarHidden="true">
     <FlexboxLayout flexDirection="column" justifyContent="space-between" alignItems="stretch" class="login-container background">
       <StackLayout verticalAlignment="center" class="login-field" style="text-align: center;">
-        <Image src="res://drawable/logo2" width="100" class="login-image"/>
+        <Image src="res://drawable/logo" width="100" class="login-image"/>
         <Label text="ThumbzApp" style="font-weight: bold; color: white; font-size: 15px;"></Label>
       </StackLayout>
       <StackLayout verticalAlignment="center" class="login-field">
