@@ -1,18 +1,15 @@
 <template>
   <Page class="login landing" actionBarHidden="true">
     <FlexboxLayout flexDirection="column" justifyContent="space-between" alignItems="stretch" class="login-container background">
-      <StackLayout verticalAlignment="center" class="login-field" style="text-align: center;" height="25%">
-        <Image src="res://drawable/logo" width="300" class="login-image"/>
+      <StackLayout verticalAlignment="bottom" class="login-field" style="text-align: center;" height="40%">
+        <Image src="res://drawable/logo" width="200" class="login-image"/>
       </StackLayout>
-      <StackLayout verticalAlignment="center" class="login-field">
-        <TextField height="50" hint="Email" v-model="form.email" class="input-rounded"/>
-        <TextField height="50" hint="Password" secure="true" v-model="form.password" class="input-rounded"/>
-        <!-- <Button height="50" class="login-btn" :text="buttonText" @tap="onLoginClick" :isEnabled="!waiting"/> -->
+      <StackLayout verticalAlignment="top" class="login-field" height="60%">
+        <TextField height="50" hint="Email" v-model="form.email" class="login-input"/>
+        <TextField height="50" hint="Password" secure="true" v-model="form.password" class="login-input"/>
         <Button height="50" class="login-btn" text="Login" @tap="onLoginClick()"/>
-      </StackLayout>
-      <StackLayout orientation="horizontal">
-      <!-- <Button width="44%" class="hyperlink-gensan" @tap="camiguinLink"/>
-        <Button width="44%" class="hyperlink-infosoft" @tap="infosoftLink"/> -->
+        <Label text="Forgot Password?" class="forgot-text" @tap="forgot()"></Label>
+        <StackLayout class="hr-light" style="margin: 10%"></StackLayout>
       </StackLayout>
     </FlexboxLayout>
   </Page>
@@ -38,6 +35,9 @@
    methods: {
     ...mapActions('user', ['LOGIN_USER']),
     ...mapMutations('user', ['SET_USER']),
+    forgot () {
+      console.log('pasmo ka')
+    },
     onLoginClick() {
 
        /*this.checkVersion()
