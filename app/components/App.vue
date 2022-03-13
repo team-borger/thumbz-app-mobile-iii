@@ -1,6 +1,6 @@
 <template>
   <page actionBarHidden="true">
-    <Navigator :defaultRoute="isLoggedIn ? '/home' : '/landing'"/>
+    <Navigator :defaultRoute="isLoggedIn ? '/home' : '/login'"/>
   </page>
 </template>
 <script>

@@ -9,7 +9,13 @@
         <TextField height="50" hint="Password" secure="true" v-model="form.password" class="login-input"/>
         <Button height="50" class="login-btn" text="Login" @tap="onLoginClick()"/>
         <Label text="Forgot Password?" class="forgot-text" @tap="forgot()"></Label>
-        <StackLayout class="hr-light" style="margin: 10%"></StackLayout>
+        <AbsoluteLayout style="margin: 5% 10% 5% 7%; text-align: center; color: white;">
+          <StackLayout class="hr-light" left="10" top="15"></StackLayout>
+          <StackLayout left="10" top="5" style="width: 100%">
+            <Label text="OR" width="30" backgroundColor="#880ED4"/>
+          </StackLayout>
+        </AbsoluteLayout>
+        <Button height="50" class="login-btn" text="Create an account" @tap="$navigator.navigate('/signup')"/>
       </StackLayout>
     </FlexboxLayout>
   </Page>
