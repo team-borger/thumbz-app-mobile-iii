@@ -38,7 +38,7 @@
             </GridLayout>
           </FlexboxLayout>
         </StackLayout>
-      </ScrollView>
+      </ScrollView>   
       <StackLayout row="1" column="0" width="100%">
         <FlexboxLayout class="message-box">
           <FlexboxLayout class="text-area">
@@ -46,9 +46,12 @@
               hint="Type a message"
               text=""
               class="text-view chat-field"
+              v-model="chatfield"
             ></TextField>
-            <StackLayout elevation="0" class="icon" height="35" width="35" backgroundColor="#880ED4" verticalAlignment="center" style="display: flex; flex-direction: column; justify-content: center; margin-right: 30px;">
-              <Label style="font-size: 15px; color: white; text-align: center;">
+            <StackLayout @tap="createMessage()"  elevation="0" class="icon" height="35" width="35" backgroundColor="#880ED4" verticalAlignment="center" style="display: flex; flex-direction: column; justify-content: center; margin-right: 30px;">
+              <Label 
+                style="font-size: 15px; color: white; text-align: center;"
+              >
                 <FormattedString>
                   <Span class="fas" text.decode="&#xf1d8; "/>
                 </FormattedString>
@@ -70,10 +73,11 @@
       return {
         messages: [],
         user: {},
+        chatfield: '',
       }
     },
     methods: {
-      ...mapActions('user', ['LOAD_THREAD']),
+      ...mapActions('user', ['LOAD_THREAD', 'CREATE_MESSAGE']),
       loadThreads() {
         this.LOAD_THREAD(this.active_chat.contact.id)
         .then(response => {
@@ -83,6 +87,18 @@
             console.log('aaa', this.active_chat)
             console.log('bbb', this.user)
           })
+        })
+      },
+      createMessage() {
+        console.log(123)
+        const payload = {
+          recepient_id: this.active_chat.contact.id,
+          content: this.chatfield,
+        }
+        this.CREATE_MESSAGE(payload)
+        .then(response => {
+          this.chatfield = ''
+          console.log(response)
         })
       }
     },
