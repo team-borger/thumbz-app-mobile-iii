@@ -16,13 +16,6 @@
         <StackLayout orientation="vertical" style="margin: 20px 50px">
           <FlexboxLayout flexDirection="column" v-for="(item, index) in messages" :key="index">
             <GridLayout :className="item.sender_id === user.id ? 'nsChatView-item-right' : 'nsChatView-item-left'" rows="auto" columns="auto,*,auto">
-              <!-- <StackLayout row="0"
-                :col="item.sender_id === user.id ? '2' : '0'"
-                class="nsChatView-avatar"
-                backgroundColor="#eee" style="height: 64; display: flex; flex-direction: column; justify-content: center; padding-top: 35px;">
-                <Label v-if="item.sender_id === user.id" style="font-size: 25px; color: black; text-align: center;" :text="`${user.first_name.charAt(0)}${user.last_name.charAt(0)}`"></Label>
-                <Label v-else style="font-size: 25px; color: black; text-align: center;" :text="`${active_chat.contact.first_name.charAt(0)}${active_chat.contact.last_name.charAt(0)}`"></Label>
-              </StackLayout> -->
               <StackLayout row="0" col="1" className="nsChatView-message">
                 <StackLayout verticalAlignment="top" :horizontalAlignment="item.sender_id === user.id ? 'right' : 'left'" className="nsChatView-content">        
                   <Label :horizontalAlignment="item.sender_id === user.id ? 'right' : 'left'"
@@ -48,7 +41,7 @@
               class="text-view chat-field"
               v-model="chatfield"
             ></TextField>
-            <StackLayout @tap="createMessage()"  elevation="0" class="icon" height="35" width="35" backgroundColor="#880ED4" verticalAlignment="center" style="display: flex; flex-direction: column; justify-content: center; margin-right: 30px;">
+            <StackLayout @tap="createMessage()" elevation="0" class="icon" height="35" width="35" backgroundColor="#880ED4" verticalAlignment="center" style="display: flex; flex-direction: column; justify-content: center;">
               <Label 
                 style="font-size: 15px; color: white; text-align: center;"
               >

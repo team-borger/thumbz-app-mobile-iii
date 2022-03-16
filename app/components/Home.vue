@@ -18,10 +18,10 @@
           <GridLayout ~mainContent columns="*" rows="*">
             <FlexboxLayout flexDirection="column">
               <StackLayout verticalAlignment="center" style="margin-top: 30px; height: 350px;" v-if="contacts.length > 9">
-                <TextField height="50" hint="Search Message" v-model="form.first_name" class="input-search"/>
+                <TextField height="50" hint="Search" v-model="form.first_name" class="input-search" @tap="$navigator.navigate('/search')"/>
               </StackLayout>
               <StackLayout verticalAlignment="center" style="margin-top: 30px;" v-else>
-                <TextField height="50" hint="Search Message" v-model="form.first_name" class="input-search"/>
+                <TextField height="50" hint="Search" v-model="form.first_name" class="input-search" @tap="$navigator.navigate('/search')"/>
               </StackLayout>
 
               <ScrollView>
@@ -105,7 +105,7 @@ export default {
       .then(result => {
         if (result) {
           this.RESET_LOGIN_STATE()
-          this.$navigator.navigate('/landing', { clearHistory: true })
+          this.$navigator.navigate('/login', { clearHistory: true })
         }
       })
     },
