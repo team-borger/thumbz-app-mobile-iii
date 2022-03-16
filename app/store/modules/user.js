@@ -47,7 +47,7 @@ const actions = {
     return await axiosgetApi(`messages/threads/${sender_id}/`)
   },
   async CREATE_MESSAGE ({commit}, payload) {
-    return await axiosPostApi(`messages/create-message/`, payload)
+    return await axiospostApi(`messages/create-message/`, payload)
   }
 }
 
