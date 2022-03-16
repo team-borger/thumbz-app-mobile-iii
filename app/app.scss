@@ -77,7 +77,7 @@ FlexboxLayout.login-container {
   opacity: 1;
   background-color: white;
   margin-bottom: 20px;
-  border-radius:30;
+  /*border-radius:30;*/
   color: #4f1995;
 }
 
@@ -88,9 +88,10 @@ FlexboxLayout.login-container {
   opacity: 1;
   background-color: white;
   margin-bottom: 20px;
-  border-radius: 20;
+  border-radius: 10;
   color: #4f1995;
-  box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+  background: #eee;
+  box-shadow: 0 1px 5px rgb(0 0 0 / 0.2);
 }
 
 StackLayout.login-field {

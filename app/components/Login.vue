@@ -5,7 +5,7 @@
         <Image src="res://drawable/logo" width="200" class="login-image"/>
       </StackLayout>
       <StackLayout verticalAlignment="top" class="login-field" height="60%">
-        <TextField height="50" hint="Email" v-model="form.email" class="login-input"/>
+        <TextField height="50" hint="Email" keyboardType="email" v-model="form.email" class="login-input"/>
         <TextField height="50" hint="Password" secure="true" v-model="form.password" class="login-input"/>
         <Button height="50" class="login-btn" text="Login" @tap="onLoginClick()"/>
         <Label text="Forgot Password?" class="forgot-text" @tap="forgot()"></Label>
