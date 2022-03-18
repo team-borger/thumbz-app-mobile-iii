@@ -11,6 +11,11 @@ import Navigator from 'nativescript-vue-navigator'
 import {routes} from './routes'
 Vue.use(Navigator, { routes })
 
+// WebRTC ===========================================================================
+import WebRTCView from '@eclairab/nativescript-webrtc/src/vue'
+Vue.use(WebRTCView)
+// import { WebRTC } from 'nativescript-webrtc-plugin';
+
 // Drawer ===========================================================================
 Vue.registerElement(
   'RadSideDrawer',
