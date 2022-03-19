@@ -10,7 +10,7 @@
           <TextField height="50" hint="First name" v-model="form.first_name" class="login-input"/>
           <TextField height="50" hint="Middle name" v-model="form.middle_name" class="login-input"/>
           <TextField height="50" hint="Last name" v-model="form.last_name" class="login-input"/>
-          <TextField height="50" hint="Mobile number" keyboardType="phone" v-model="form.phone" class="login-input"/>
+          <TextField height="50" hint="Mobile number" maxLength="11" keyboardType="phone" v-model="form.phone" class="login-input"/>
           <TextField height="50" hint="Email" v-model="form.email" keyboardType="email" class="login-input"/>
           <TextField height="50" hint="Password" secure="true" v-model="form.password" class="login-input"/>
           <TextField height="50" hint="Confirm Password" secure="true" v-model="form.confirm_password" class="login-input"/>
