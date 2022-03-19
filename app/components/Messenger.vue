@@ -102,8 +102,7 @@
       },
       skidit() {
         const skekert = WebRTC
-        console.log(123, skekert)
-        /*const webrtc = new WebRTC({
+        const webrtc = new WebRTC({
           enableAudio: true, // default true
           enableVideo: false, // default true
           iceServers: [
@@ -117,7 +116,7 @@
               password: 'password'
             }
           ]
-        })*/
+        })
       }
     },
     computed: {
@@ -126,7 +125,6 @@
     created() {
       this.user = JSON.parse(getString('user'))
       this.loadThreads()
-      console.log(moment(moment.now()).format('LL'))
       // this.skidit()
     }
   }

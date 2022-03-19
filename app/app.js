@@ -27,7 +27,6 @@ Vue.registerElement(
 )
 
 new Vue({
-  connectycube, 
   store,
   render: (h) => h('frame', [h(App)]),
 }).$start()
