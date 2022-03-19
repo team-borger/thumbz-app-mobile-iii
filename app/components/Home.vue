@@ -50,7 +50,7 @@
                             />
                             <Label :class="item.viewed === false ? 'black-text' : ''"
                               style="font-size: 12px; text-align: right"
-                              :text="'12:58'"
+                              :text="dateFormat(item.date_created)"
                             />
                           </FlexboxLayout>
                           <FlexboxLayout>
@@ -72,6 +72,7 @@
     </Page>
 </template>
 <script>
+import moment from 'moment'
 import { mapActions, mapMutations } from 'vuex'
 export default {
   data:() => ({
@@ -90,6 +91,11 @@ export default {
           console.log('asdadas', this.contacts)
         })
       })
+    },
+    dateFormat(date)
+    {
+      let format = moment(date).format('hh:mm A')
+      return format
     },
     onContactClick(contact) {
       this.SET_ACTIVE_CHAT(contact)

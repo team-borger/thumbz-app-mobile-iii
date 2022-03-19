@@ -37,7 +37,7 @@
     "category-general"
   ],
   "dependencies": {
-    "@eclairab/nativescript-webrtc": "^1.0.3",
+    "@eclairab/nativescript-webrtc": "^1.0.4",
     "@nativescript-community/ui-material-cardview": "^6.2.14",
     "@nativescript/appversion": "^2.0.0",
     "@nativescript/core": "~8.1.1",
@@ -51,6 +51,7 @@
     "nativescript-ui-sidedrawer": "^10.0.2",
     "nativescript-vue": "~2.9.0",
     "nativescript-vue-navigator": "^1.2.0",
+    "tns-platform-declarations": "^6.6.0-next-2020-05-08-112112-01",
     "typescript": "^4.6.2",
     "vuex": "^3.6.2"
   },

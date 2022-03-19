@@ -32,7 +32,7 @@
                 <StackLayout verticalAlignment="top" :horizontalAlignment="item.sender_id === user.id ? 'right' : 'left'" className="nsChatView-content">        
                   <Label :horizontalAlignment="item.sender_id === user.id ? 'right' : 'left'"
                          className="nsChatView-date"
-                         :text="item.date_created"
+                         :text="dateFormat(item.date_created)"
                          visibility="visible" />
                   <Label :horizontalAlignment="item.sender_id === user.id ? 'right' : 'left'" className="nsChatView-messageText"
                          :text="item.message" textWrap="true" />
@@ -85,6 +85,11 @@
           })
         })
       },
+      dateFormat(date)
+      {
+        let format = moment(date).format('hh:mm A')
+        return format
+      },
       createMessage() {
         console.log(123)
         const payload = {
@@ -99,6 +104,24 @@
         .catch(error => {
           console.log(error)
         })
+      },
+      skidit() {
+        const skekert = WebRTC
+        const webrtc = new WebRTC({
+          enableAudio: true, // default true
+          enableVideo: false, // default true
+          iceServers: [
+            // Optional defaults to google stun servers
+            {
+              url: 'stun:stun.l.google.com:19302'
+            },
+            {
+              url: 'serverRequiresAuth',
+              username: 'username',
+              password: 'password'
+            }
+          ]
+        })
       }
     },
     computed: {
@@ -107,6 +130,7 @@
     created() {
       this.user = JSON.parse(getString('user'))
       this.loadThreads()
+      // this.skidit()
     }
   }
 </script>
