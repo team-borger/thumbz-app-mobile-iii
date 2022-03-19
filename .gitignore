@@ -3,6 +3,8 @@ hooks/
 node_modules/
 platforms/
 
+environment.js
+
 # Logs
 logs
 *.log
