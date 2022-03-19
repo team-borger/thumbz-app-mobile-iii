@@ -30,6 +30,7 @@
 
             </GridLayout>
           </FlexboxLayout>
+          <!-- <WebRTCView #remoteVideoView height="50%" ></WebRTCView> -->
         </StackLayout>
       </ScrollView>   
       <StackLayout row="1" column="0" width="100%">
@@ -59,7 +60,9 @@
 </template>
 
 <script>
+  import moment from 'moment'
   import { mapActions, mapGetters } from 'vuex'
+  import { WebRTC } from '@eclairab/nativescript-webrtc/src'
   import { getString } from "@nativescript/core/application-settings"
   export default {
     data() {
@@ -76,14 +79,10 @@
         .then(response => {
           this.$nextTick(()=>{
             this.messages = response
-            console.log(this.messages)
-            console.log('aaa', this.active_chat)
-            console.log('bbb', this.user)
           })
         })
       },
       createMessage() {
-        console.log(123)
         const payload = {
           recepient_id: this.active_chat.contact.id,
           content: this.chatfield,
@@ -91,11 +90,29 @@
         this.CREATE_MESSAGE(payload)
         .then(response => {
           this.chatfield = ''
-          console.log(response)
         })
         .catch(error => {
           console.log(error)
         })
+      },
+      skidit() {
+        const skekert = WebRTC
+        console.log(123, skekert)
+        /*const webrtc = new WebRTC({
+          enableAudio: true, // default true
+          enableVideo: false, // default true
+          iceServers: [
+            // Optional defaults to google stun servers
+            {
+              url: 'stun:stun.l.google.com:19302'
+            },
+            {
+              url: 'serverRequiresAuth',
+              username: 'username',
+              password: 'password'
+            }
+          ]
+        })*/
       }
     },
     computed: {
@@ -104,6 +121,8 @@
     created() {
       this.user = JSON.parse(getString('user'))
       this.loadThreads()
+      console.log(moment(moment.now()).format('LL'))
+      // this.skidit()
     }
   }
 </script>

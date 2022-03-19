@@ -14,7 +14,11 @@ Vue.use(Navigator, { routes })
 // WebRTC ===========================================================================
 import WebRTCView from '@eclairab/nativescript-webrtc/src/vue'
 Vue.use(WebRTCView)
-// import { WebRTC } from 'nativescript-webrtc-plugin';
+
+// import { WebRTC } from '@eclairab/nativescript-webrtc/src'
+
+// Mixins ===========================================================================
+import connectycube from './mixins/connectycube'
 
 // Drawer ===========================================================================
 Vue.registerElement(
@@ -23,6 +27,7 @@ Vue.registerElement(
 )
 
 new Vue({
+  connectycube, 
   store,
   render: (h) => h('frame', [h(App)]),
 }).$start()
