@@ -1,14 +1,26 @@
 <template>
   <Page>
     <ActionBar style="background: #fff; box-shadow: none;">
-      <GridLayout width="100%" columns="auto, *" rows="auto, *">
-        <!-- <Label style="font-size: 30px; color: #880ED4; text-align: center;">
+      <FlexboxLayout alignItems="center" style="margin-top: 30px;">
+        <Label color="#4f4f4f" style="font-size: 18px; text-align: center; color: #880ED4;" width="10%" @tap="$navigator.navigate('/home')">
           <FormattedString>
-            <Span class="fas" text.decode="&#xf104; "/>
+            <Span class="fas" text.decode="&#xf060;"/>
           </FormattedString>
-        </Label> -->
-        <Label style="text-align:left; font-weight: bold; font-size: 16px; padding-bottom: 10px; color: #880ED4;" row="0" :text="`${active_chat.contact.first_name} ${active_chat.contact.last_name}`"></Label>
-      </GridLayout>
+        </Label>
+        <StackLayout verticalAlignment="center" width="60%">
+          <Label style="text-align:left; font-weight: bold; font-size: 16px;" row="0" :text="`${active_chat.contact.first_name} ${active_chat.contact.last_name}`"></Label>
+        </StackLayout>
+        <Label color="#4f4f4f" style="font-size: 18px; text-align: left; color: #880ED4;" width="15%">
+          <FormattedString>
+            <Span class="fas" text.decode="&#xf095;"/>
+          </FormattedString>
+        </Label>
+        <Label color="#4f4f4f" style="font-size: 18px; text-align: left; color: #880ED4;" width="15%">
+          <FormattedString>
+            <Span class="fas" text.decode="&#xf03d;"/>
+          </FormattedString>
+        </Label>
+      </FlexboxLayout>
     </ActionBar>
 
     <GridLayout rows="*, auto" columns="auto" class="wallpaper">
@@ -25,32 +37,22 @@
                   <Label :horizontalAlignment="item.sender_id === user.id ? 'right' : 'left'" className="nsChatView-messageText"
                          :text="item.message" textWrap="true" />
                 </StackLayout>
-
               </StackLayout>
-
             </GridLayout>
           </FlexboxLayout>
-          <!-- <WebRTCView #remoteVideoView height="50%" ></WebRTCView> -->
         </StackLayout>
       </ScrollView>   
       <StackLayout row="1" column="0" width="100%">
         <FlexboxLayout class="message-box">
-          <FlexboxLayout class="text-area">
-            <TextField
-              hint="Type a message"
-              text=""
-              class="text-view chat-field"
-              v-model="chatfield"
-            ></TextField>
-            <StackLayout @tap="createMessage()" elevation="0" class="icon" height="35" width="35" backgroundColor="#880ED4" verticalAlignment="center" style="display: flex; flex-direction: column; justify-content: center;">
-              <Label 
-                style="font-size: 15px; color: white; text-align: center;"
-              >
-                <FormattedString>
-                  <Span class="fas" text.decode="&#xf1d8; "/>
-                </FormattedString>
-              </Label>
+          <FlexboxLayout alignItems="center">
+            <StackLayout verticalAlignment="center" width="90%">
+              <TextField height="50" hint="Type a message" class="input-search" style="height: 130px;"/>
             </StackLayout>
+            <Label color="#4f4f4f" style="font-size: 18px; text-align: left; color: #880ED4;" width="10%">
+              <FormattedString>
+                <Span class="fas" text.decode="&#xf1d8; "/>
+              </FormattedString>
+            </Label>
           </FlexboxLayout>
         </FlexboxLayout>
       </StackLayout>
@@ -60,9 +62,7 @@
 </template>
 
 <script>
-  import moment from 'moment'
   import { mapActions, mapGetters } from 'vuex'
-  import { WebRTC } from '@eclairab/nativescript-webrtc/src'
   import { getString } from "@nativescript/core/application-settings"
   export default {
     data() {
@@ -79,6 +79,9 @@
         .then(response => {
           this.$nextTick(()=>{
             this.messages = response
+            console.log(this.messages)
+            console.log('aaa', this.active_chat)
+            console.log('bbb', this.user)
           })
         })
       },
@@ -88,6 +91,7 @@
         return format
       },
       createMessage() {
+        console.log(123)
         const payload = {
           recepient_id: this.active_chat.contact.id,
           content: this.chatfield,
@@ -95,6 +99,7 @@
         this.CREATE_MESSAGE(payload)
         .then(response => {
           this.chatfield = ''
+          console.log(response)
         })
         .catch(error => {
           console.log(error)

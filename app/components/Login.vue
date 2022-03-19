@@ -60,7 +60,7 @@
          })
          .catch(error => {
            this.waiting = false
-           // console.log('catch: ', error.data.error)
+           console.log('catch: ', error.data.error)
            this.snackBar("password", "Error", "#e6494b", "Incorrect email or password")
          })
        /*}
