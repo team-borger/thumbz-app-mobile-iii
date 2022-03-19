@@ -2,10 +2,10 @@
 
 import {getString, setString} from "@nativescript/core/application-settings"
 import axios from 'axios/dist/axios'
-import urls from '~/urls.js'
+import environment from '~/environment.js'
 
 export const Http = axios.create({
-    baseURL: `${urls.API_URL}`
+    baseURL: `${environment.API_URL}`
 })
 
 Http.interceptors.request.use(function (config) {
