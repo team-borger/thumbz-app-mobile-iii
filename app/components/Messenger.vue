@@ -20,7 +20,7 @@
                 <StackLayout verticalAlignment="top" :horizontalAlignment="item.sender_id === user.id ? 'right' : 'left'" className="nsChatView-content">        
                   <Label :horizontalAlignment="item.sender_id === user.id ? 'right' : 'left'"
                          className="nsChatView-date"
-                         :text="item.date_created"
+                         :text="dateFormat(item.date_created)"
                          visibility="visible" />
                   <Label :horizontalAlignment="item.sender_id === user.id ? 'right' : 'left'" className="nsChatView-messageText"
                          :text="item.message" textWrap="true" />
@@ -81,6 +81,11 @@
             this.messages = response
           })
         })
+      },
+      dateFormat(date)
+      {
+        let format = moment(date).format('hh:mm A')
+        return format
       },
       createMessage() {
         const payload = {
