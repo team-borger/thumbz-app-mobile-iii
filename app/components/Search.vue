@@ -26,7 +26,7 @@
                   <StackLayout
                     backgroundColor="#880ED4"
                     height="100%" width="100%"
-                    style="border-radius: 50%; display: flex; flex-direction: column; justify-content: center; padding-top: 13px;"
+                    style="border-radius: 50%; display: flex; flex-direction: column; justify-content: center; padding-top: 10px;"
                   >
                     <Label style="font-size: 18px; color: white; text-align: center;"
                       :text="`${item.first_name.charAt(0)}${item.last_name.charAt(0)}`"

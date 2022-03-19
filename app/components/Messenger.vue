@@ -1,14 +1,26 @@
 <template>
   <Page>
     <ActionBar style="background: #fff; box-shadow: none;">
-      <GridLayout width="100%" columns="auto, *" rows="auto, *">
-        <!-- <Label style="font-size: 30px; color: #880ED4; text-align: center;">
+      <FlexboxLayout alignItems="center" style="margin-top: 30px;">
+        <Label color="#4f4f4f" style="font-size: 18px; text-align: center; color: #880ED4;" width="10%" @tap="$navigator.navigate('/home')">
           <FormattedString>
-            <Span class="fas" text.decode="&#xf104; "/>
+            <Span class="fas" text.decode="&#xf060;"/>
           </FormattedString>
-        </Label> -->
-        <Label style="text-align:left; font-weight: bold; font-size: 16px; padding-bottom: 10px; color: #880ED4;" row="0" :text="`${active_chat.contact.first_name} ${active_chat.contact.last_name}`"></Label>
-      </GridLayout>
+        </Label>
+        <StackLayout verticalAlignment="center" width="60%">
+          <Label style="text-align:left; font-weight: bold; font-size: 16px;" row="0" :text="`${active_chat.contact.first_name} ${active_chat.contact.last_name}`"></Label>
+        </StackLayout>
+        <Label color="#4f4f4f" style="font-size: 18px; text-align: left; color: #880ED4;" width="15%">
+          <FormattedString>
+            <Span class="fas" text.decode="&#xf095;"/>
+          </FormattedString>
+        </Label>
+        <Label color="#4f4f4f" style="font-size: 18px; text-align: left; color: #880ED4;" width="15%">
+          <FormattedString>
+            <Span class="fas" text.decode="&#xf03d;"/>
+          </FormattedString>
+        </Label>
+      </FlexboxLayout>
     </ActionBar>
 
     <GridLayout rows="*, auto" columns="auto" class="wallpaper">
@@ -25,26 +37,19 @@
                   <Label :horizontalAlignment="item.sender_id === user.id ? 'right' : 'left'" className="nsChatView-messageText"
                          :text="item.message" textWrap="true" />
                 </StackLayout>
-
               </StackLayout>
-
             </GridLayout>
           </FlexboxLayout>
         </StackLayout>
       </ScrollView>   
       <StackLayout row="1" column="0" width="100%">
         <FlexboxLayout class="message-box">
-          <FlexboxLayout class="text-area">
-            <TextField
-              hint="Type a message"
-              text=""
-              class="text-view chat-field"
-              v-model="chatfield"
-            ></TextField>
-            <StackLayout @tap="createMessage()" elevation="0" class="icon" height="35" width="35" backgroundColor="#880ED4" verticalAlignment="center" style="display: flex; flex-direction: column; justify-content: center;">
-              <Label 
-                style="font-size: 15px; color: white; text-align: center;"
-              >
+          <FlexboxLayout alignItems="center">
+            <StackLayout verticalAlignment="center" width="90%">
+              <TextField height="50" hint="Search" class="input-search" style="height: 130px;"/>
+            </StackLayout>
+            <StackLayout @tap="createMessage()" elevation="0" class="icon" height="35" width="35" backgroundColor="#880ED4" verticalAlignment="center" style="display: flex; flex-direction: column; justify-content: center;" width="10%">
+              <Label color="#4f4f4f" style="font-size: 18px; text-align: left;" width="10%">
                 <FormattedString>
                   <Span class="fas" text.decode="&#xf1d8; "/>
                 </FormattedString>
