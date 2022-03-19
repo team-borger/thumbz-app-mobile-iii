@@ -40,22 +40,19 @@
               </StackLayout>
             </GridLayout>
           </FlexboxLayout>
-          <!-- <WebRTCView #remoteVideoView height="50%" ></WebRTCView> -->
         </StackLayout>
       </ScrollView>   
       <StackLayout row="1" column="0" width="100%">
         <FlexboxLayout class="message-box">
           <FlexboxLayout alignItems="center">
             <StackLayout verticalAlignment="center" width="90%">
-              <TextField height="50" hint="Search" class="input-search" style="height: 130px;"/>
+              <TextField height="50" hint="Type a message" class="input-search" style="height: 130px;"/>
             </StackLayout>
-            <StackLayout @tap="createMessage()" elevation="0" class="icon" height="35" width="35" backgroundColor="#880ED4" verticalAlignment="center" style="display: flex; flex-direction: column; justify-content: center;" width="10%">
-              <Label color="#4f4f4f" style="font-size: 18px; text-align: left;" width="10%">
-                <FormattedString>
-                  <Span class="fas" text.decode="&#xf1d8; "/>
-                </FormattedString>
-              </Label>
-            </StackLayout>
+            <Label color="#4f4f4f" style="font-size: 18px; text-align: left; color: #880ED4;" width="10%">
+              <FormattedString>
+                <Span class="fas" text.decode="&#xf1d8; "/>
+              </FormattedString>
+            </Label>
           </FlexboxLayout>
         </FlexboxLayout>
       </StackLayout>
@@ -65,9 +62,7 @@
 </template>
 
 <script>
-  import moment from 'moment'
   import { mapActions, mapGetters } from 'vuex'
-  import { WebRTC } from '@eclairab/nativescript-webrtc/src'
   import { getString } from "@nativescript/core/application-settings"
   export default {
     data() {
@@ -84,10 +79,14 @@
         .then(response => {
           this.$nextTick(()=>{
             this.messages = response
+            console.log(this.messages)
+            console.log('aaa', this.active_chat)
+            console.log('bbb', this.user)
           })
         })
       },
       createMessage() {
+        console.log(123)
         const payload = {
           recepient_id: this.active_chat.contact.id,
           content: this.chatfield,
@@ -95,29 +94,11 @@
         this.CREATE_MESSAGE(payload)
         .then(response => {
           this.chatfield = ''
+          console.log(response)
         })
         .catch(error => {
           console.log(error)
         })
-      },
-      skidit() {
-        const skekert = WebRTC
-        console.log(123, skekert)
-        /*const webrtc = new WebRTC({
-          enableAudio: true, // default true
-          enableVideo: false, // default true
-          iceServers: [
-            // Optional defaults to google stun servers
-            {
-              url: 'stun:stun.l.google.com:19302'
-            },
-            {
-              url: 'serverRequiresAuth',
-              username: 'username',
-              password: 'password'
-            }
-          ]
-        })*/
       }
     },
     computed: {
@@ -126,8 +107,6 @@
     created() {
       this.user = JSON.parse(getString('user'))
       this.loadThreads()
-      console.log(moment(moment.now()).format('LL'))
-      // this.skidit()
     }
   }
 </script>
