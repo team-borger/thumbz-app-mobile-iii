@@ -24,7 +24,10 @@
                 <TextField height="50" hint="Search" v-model="form.first_name" class="input-search" @tap="$navigator.navigate('/search')"/>
               </StackLayout>
 
-              <ScrollView>
+              <FlexboxLayout justifyContent="center" v-if="pageload === true">
+                <Gif src="~/assets/images/loading.gif" height="50"/>
+              </FlexboxLayout>
+              <ScrollView v-if="pageload === false">
                 <StackLayout orientation="vertical" style="margin: 20px 50px">
                   <FlexboxLayout flexDirection="column" v-for="(item, index) in contacts" :key="index" elevation="5" height="60" width="100%" class="logout-btn" style="margin: 5px 0;">
                     <MDCardView dock="bottom" elevation="0" width="100%" height="100%" class="logout-btn" @tap="onContactClick(item)">
@@ -78,7 +81,8 @@ export default {
   data:() => ({
     msg: 'Hello World!',
     form:{},
-    contacts: []
+    contacts: [],
+    pageload: true
   }),
   methods: {
     ...mapMutations('user', ['RESET_LOGIN_STATE', 'SET_ACTIVE_CHAT']),
@@ -86,10 +90,11 @@ export default {
     loadContacts() {
       this.LOAD_CONTACTS()
       .then(response => {
-        this.$nextTick(() => {
-          this.contacts = response
-          console.log('asdadas', this.contacts)
-        })
+        this.pageload = false
+        this.contacts = response
+      }).catch(err => {
+        console.log(err)
+        this.pageload = false
       })
     },
     dateFormat(date)
@@ -116,7 +121,7 @@ export default {
       })
     },
   },
-  created() {
+  mounted() {
     this.loadContacts()
   }
 }

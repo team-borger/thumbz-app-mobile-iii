@@ -24,7 +24,10 @@
     </ActionBar>
 
     <GridLayout rows="*, auto" columns="auto" class="wallpaper">
-      <ScrollView scrollBarIndicatorVisible="false">
+      <FlexboxLayout justifyContent="center" v-if="pageload === true">
+        <Gif src="~/assets/images/loading.gif" height="50"/>
+      </FlexboxLayout>
+      <ScrollView scrollBarIndicatorVisible="false" v-if="pageload === false">
         <StackLayout orientation="vertical" style="margin: 20px 50px">
           <FlexboxLayout flexDirection="column" v-for="(item, index) in messages" :key="index">
             <GridLayout :className="item.sender_id === user.id ? 'nsChatView-item-right' : 'nsChatView-item-left'" rows="auto" columns="auto,*,auto">
@@ -67,12 +70,14 @@
   import { mapActions, mapGetters } from 'vuex'
   import { getString } from "@nativescript/core/application-settings"
   import moment from 'moment'
+
   export default {
     data() {
       return {
         messages: [],
         user: {},
         chatfield: '',
+        pageload: true
       }
     },
     methods: {
@@ -80,9 +85,13 @@
       loadThreads() {
         this.LOAD_THREAD(this.active_chat.contact.id)
         .then(response => {
+          this.pageload = false
           this.$nextTick(()=>{
             this.messages = response
           })
+        }).catch(err => {
+          console.log(err)
+          this.pageload = false
         })
       },
       dateFormat(date) {
