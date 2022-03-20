@@ -24,7 +24,7 @@
     </ActionBar>
 
     <GridLayout rows="*, auto" columns="auto" class="wallpaper">
-      <ScrollView>
+      <ScrollView scrollBarIndicatorVisible="false">
         <StackLayout orientation="vertical" style="margin: 20px 50px">
           <FlexboxLayout flexDirection="column" v-for="(item, index) in messages" :key="index">
             <GridLayout :className="item.sender_id === user.id ? 'nsChatView-item-right' : 'nsChatView-item-left'" rows="auto" columns="auto,*,auto">
@@ -34,7 +34,8 @@
                          className="nsChatView-date"
                          :text="dateFormat(item.date_created)"
                          visibility="visible" />
-                  <Label :horizontalAlignment="item.sender_id === user.id ? 'right' : 'left'" className="nsChatView-messageText"
+                  <Label :horizontalAlignment="item.sender_id === user.id ? 'right' : 'left'" 
+                          className="nsChatView-messageText"
                          :text="item.message" textWrap="true" />
                 </StackLayout>
               </StackLayout>
@@ -45,14 +46,15 @@
       <StackLayout row="1" column="0" width="100%">
         <FlexboxLayout class="message-box">
           <FlexboxLayout alignItems="center">
-            <StackLayout verticalAlignment="center" width="90%">
-              <TextField height="50" hint="Type a message" class="input-search" style="height: 130px;"/>
+            <StackLayout verticalAlignment="center" width="100%" v-if="chatfield === ''">
+              <TextField v-model="chatfield" text="" height="50" hint="Type a message" class="input-search" style="height: 130px;"/>
             </StackLayout>
-            <Label color="#4f4f4f" style="font-size: 18px; text-align: left; color: #880ED4;" width="10%">
-              <FormattedString>
-                <Span class="fas" text.decode="&#xf1d8; "/>
-              </FormattedString>
-            </Label>
+            <StackLayout verticalAlignment="center" width="85%" v-else>
+              <TextField v-model="chatfield" text="" height="50" hint="Type a message" class="input-search" style="height: 130px;"/>
+            </StackLayout>
+            <StackLayout verticalAlignment="center" width="15%" @tap="createMessage()" v-if="chatfield !== ''">
+              <Image style="margin-right: 50px;" row="0" col="0" top="0" src="~/assets/images/sendbtn.png" height="30" width="30"/>
+            </StackLayout>
           </FlexboxLayout>
         </FlexboxLayout>
       </StackLayout>
@@ -64,6 +66,7 @@
 <script>
   import { mapActions, mapGetters } from 'vuex'
   import { getString } from "@nativescript/core/application-settings"
+  import moment from 'moment'
   export default {
     data() {
       return {
@@ -79,27 +82,22 @@
         .then(response => {
           this.$nextTick(()=>{
             this.messages = response
-            console.log(this.messages)
-            console.log('aaa', this.active_chat)
-            console.log('bbb', this.user)
           })
         })
       },
-      dateFormat(date)
-      {
+      dateFormat(date) {
         let format = moment(date).format('hh:mm A')
         return format
       },
       createMessage() {
-        console.log(123)
         const payload = {
           recepient_id: this.active_chat.contact.id,
           content: this.chatfield,
         }
         this.CREATE_MESSAGE(payload)
         .then(response => {
+          this.messages.push(response)
           this.chatfield = ''
-          console.log(response)
         })
         .catch(error => {
           console.log(error)
