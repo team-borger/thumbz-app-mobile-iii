@@ -20,6 +20,12 @@ Vue.use(WebRTCView)
 // Mixins ===========================================================================
 import connectycube from './mixins/connectycube'
 
+import { Gif } from "nativescript-gif"
+Vue.registerElement(
+	"Gif", 
+	() => Gif
+)
+
 // Drawer ===========================================================================
 Vue.registerElement(
   'RadSideDrawer',
