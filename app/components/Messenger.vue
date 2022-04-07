@@ -30,13 +30,16 @@
       <ScrollView scrollBarIndicatorVisible="false" v-if="pageload === false">
         <StackLayout orientation="vertical" style="margin: 20px 50px">
           <FlexboxLayout flexDirection="column" v-for="(item, index) in messages" :key="index">
-            <GridLayout :className="item.sender_id === user.id ? 'nsChatView-item-right' : 'nsChatView-item-left'" rows="auto" columns="auto,*,auto">
+            <GridLayout rows="auto" columns="auto,*,auto">
               <StackLayout row="0" col="1" className="nsChatView-message">
-                <StackLayout verticalAlignment="top" :horizontalAlignment="item.sender_id === user.id ? 'right' : 'left'" className="nsChatView-content">        
-                  <Label :horizontalAlignment="item.sender_id === user.id ? 'right' : 'left'"
-                         className="nsChatView-date"
-                         :text="dateFormat(item.date_created)"
-                         visibility="visible" />
+                <Label
+                  v-if="pasmoxx === index"
+                  :horizontalAlignment="item.sender_id === user.id ? 'right' : 'left'"
+                  className="nsChatView-date"
+                  :text="dateFormat(item.date_created)"
+                  visibility="visible"
+                />
+                <StackLayout verticalAlignment="top" :horizontalAlignment="item.sender_id === user.id ? 'right' : 'left'" :className="item.sender_id === user.id ? 'nsChatView-item-right nsChatView-content' : 'nsChatView-item-left nsChatView-content'" @tap="wawexx(index)">        
                   <Label :horizontalAlignment="item.sender_id === user.id ? 'right' : 'left'" 
                           className="nsChatView-messageText"
                          :text="item.message" textWrap="true" />
@@ -77,11 +80,19 @@
         messages: [],
         user: {},
         chatfield: '',
-        pageload: true
+        pageload: true,
+        pasmoxx: null
       }
     },
     methods: {
       ...mapActions('user', ['LOAD_THREAD', 'CREATE_MESSAGE']),
+      wawexx (payload) {
+        if (this.pasmoxx !== payload || this.pasmoxx === null) {
+          this.pasmoxx = payload
+        } else {
+          this.pasmoxx = null
+        }
+      },
       loadThreads() {
         this.LOAD_THREAD(this.active_chat.contact.id)
         .then(response => {
