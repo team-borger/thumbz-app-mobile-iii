@@ -86,10 +86,11 @@ export default {
   }),
   methods: {
     ...mapMutations('user', ['RESET_LOGIN_STATE', 'SET_ACTIVE_CHAT']),
-    ...mapActions('user', ['SEARCH_USER', 'LOAD_CONTACTS']),
+    ...mapActions('user', ['SEARCH_USER', 'LOAD_CONTACTS', 'UPDATE_VIEWED']),
     loadContacts() {
       this.LOAD_CONTACTS()
       .then(response => {
+        console.log(response)
         this.pageload = false
         this.contacts = response
       }).catch(err => {
@@ -103,8 +104,10 @@ export default {
       return format
     },
     onContactClick(contact) {
-      this.SET_ACTIVE_CHAT(contact)
-      this.$navigator.navigate('/messenger')
+      this.UPDATE_VIEWED(contact).then(data=>{
+        this.SET_ACTIVE_CHAT(contact)
+        this.$navigator.navigate('/messenger')
+      })
     },
     onLogoutBtnClick() {
       confirm({
