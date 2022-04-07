@@ -325,25 +325,27 @@ Label.version {
     border-radius: 8;
 }
 
-.nsChatView-item-left .nsChatView-message {
+.nsChatView-item-left{
     background-color: #edeef2;
     border-radius: 30px 30px 30px 0px;
     color: black;
+    padding: 20px 30px;
 }
 
-.nsChatView-item-right .nsChatView-message {
+.nsChatView-item-right{
     background-color: #880ED4;
     border-radius: 30px 0px 30px 30px;
     color: white;
-}
-
-.nsChatView-content {
-    margin: 6,12,6,12;
+    padding: 20px 30px;
 }
 
 .nsChatView-content .nsChatView-date {
     font-size: 11;
     margin-bottom: 1;
+}
+
+.nsChatView-messageText {
+    font-size: 14;
 }
 
 .nsChatView-view .nsChatView-messageField {

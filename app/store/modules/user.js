@@ -48,6 +48,9 @@ const actions = {
   },
   async CREATE_MESSAGE ({commit}, payload) {
     return await axiospostApi(`messages/create-message/`, payload)
+  },
+  async UPDATE_VIEWED ({commit}, payload) {
+    return await axiospostApi(`messages/update-viewed/${payload.id}`)
   }
 }
 
