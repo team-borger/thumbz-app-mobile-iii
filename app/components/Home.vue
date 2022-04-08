@@ -47,19 +47,19 @@
                         </FlexboxLayout>
                         <FlexboxLayout flexDirection="column" style="padding: 15px;">
                           <FlexboxLayout justifyContent="space-between">
-                            <Label :class="item.viewed === false ? 'black-text' : ''" width="70%"
+                            <Label :class="skrrt(item)" width="70%"
                               fontWeight="bold" style="font-size: 14px;"
                               :text="`${item.contact.first_name} ${item.contact.last_name}`"
                             />
-                            <Label :class="item.viewed === false ? 'black-text' : ''"
+                            <Label :class="skrrt(item)"
                               style="font-size: 12px; text-align: right"
                               :text="dateFormat(item.date_created)"
                             />
                           </FlexboxLayout>
                           <FlexboxLayout>
-                            <Label :class="item.viewed === false ? 'black-text' : ''" 
+                            <Label :class="skrrt(item)" 
                               fontWeight="bold" style="font-size: 12px;"
-                              :text="item.spoiler_chat"
+                              :text="item.recepient_id === item.contact.id ? `You: ${item.spoiler_chat}` : item.spoiler_chat"
                             />
                           </FlexboxLayout>
                         </FlexboxLayout>
@@ -86,7 +86,14 @@ export default {
   }),
   methods: {
     ...mapMutations('user', ['RESET_LOGIN_STATE', 'SET_ACTIVE_CHAT']),
-    ...mapActions('user', ['SEARCH_USER', 'LOAD_CONTACTS']),
+    ...mapActions('user', ['SEARCH_USER', 'LOAD_CONTACTS', 'UPDATE_VIEWED']),
+    skrrt (payload) {
+      if (payload.viewed === true && payload.recepient_id !== payload.contact.id) {
+        return 'black-text'
+      } else {
+        return ''
+      }
+    },
     loadContacts() {
       this.LOAD_CONTACTS()
       .then(response => {
@@ -103,8 +110,10 @@ export default {
       return format
     },
     onContactClick(contact) {
-      this.SET_ACTIVE_CHAT(contact)
-      this.$navigator.navigate('/messenger')
+      this.UPDATE_VIEWED(contact).then(data=>{
+        this.SET_ACTIVE_CHAT(contact)
+        this.$navigator.navigate('/messenger')
+      })
     },
     onLogoutBtnClick() {
       confirm({

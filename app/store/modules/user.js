@@ -50,7 +50,10 @@ const actions = {
     return await axiospostApi(`messages/create-message/`, payload)
   },
   async UPDATE_VIEWED ({commit}, payload) {
-    return await axiospostApi(`messages/update-viewed/${payload.id}`)
+    return await axiospostApi(`messages/update-viewed/${payload.id}`, payload.id)
+  },
+  async SUGGESTED_CONTACT ({commit}, payload) {
+    return await axiosgetApi(`users/suggested`)
   }
 }
 
