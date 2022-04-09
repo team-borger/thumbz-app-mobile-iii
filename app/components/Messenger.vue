@@ -44,6 +44,13 @@
                           className="nsChatView-messageText"
                          :text="item.message" textWrap="true" />
                 </StackLayout>
+                <Label
+                  v-if="pasmoxx === index"
+                  :horizontalAlignment="item.sender_id === user.id ? 'right' : 'left'"
+                  className="nsChatView-date"
+                  text="Seen"
+                  visibility="visible"
+                />
               </StackLayout>
             </GridLayout>
           </FlexboxLayout>

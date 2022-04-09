@@ -40,8 +40,8 @@ const actions = {
   async LOAD_CONTACTS ({commit}) {
     return await axiosgetApi('messages/conversations/')
   },
-  async SEARCH_USER ({commit}) {
-    return await axiosgetApi('users/search/')
+  async SEARCH_USER ({commit}, payload) {
+    return await axiosgetApi(`users/search?keyword=${payload.keyword}`)
   },
   async LOAD_THREAD ({commit}, sender_id) {
     return await axiosgetApi(`messages/threads/${sender_id}/`)
