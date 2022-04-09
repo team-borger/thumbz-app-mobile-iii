@@ -88,7 +88,7 @@ export default {
     ...mapMutations('user', ['RESET_LOGIN_STATE', 'SET_ACTIVE_CHAT']),
     ...mapActions('user', ['SEARCH_USER', 'LOAD_CONTACTS', 'UPDATE_VIEWED']),
     skrrt (payload) {
-      if (payload.viewed === true && payload.recepient_id !== payload.contact.id) {
+      if (payload.viewed === false && payload.recepient_id !== payload.contact.id) {
         return 'black-text'
       } else {
         return ''
